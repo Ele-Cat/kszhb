@@ -7,7 +7,7 @@
 				<uni-icons type="scan" size="24" color="#fff"></uni-icons>
 			</view>
 			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-				<swiper class="swiper-box" :autoplay="true" @change="change">
+				<swiper class="swiper-box" :autoplay="false" @change="change">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view class="swiper-item">
 							<img :src="item.url" alt="" srcset="" />
@@ -64,11 +64,11 @@
 			return {
 				title: "",
 				info: [{
-					url: "/static/images/swiper_1.png",
+					url: "../../../static/images/swiper_1.png",
 				}, {
-					url: "/static/images/swiper_2.png",
+					url: "../../../static/images/swiper_2.png",
 				}, {
-					url: "/static/images/swiper_3.png",
+					url: "../../../static/images/swiper_3.png",
 				}],
 				current: 0,
 				mode: 'default',
@@ -87,21 +87,21 @@
 			
 			const initCenterList = [{
 					id: 1,
-					img: "/static/images/pic_1.jpg",
+					img: "../../../static/images/pic_1.jpg",
 					title: "去有你的地方",
 					type: "短剧",
 					price: "80.00",
 				},
 				{
 					id: 2,
-					img: "/static/images/pic_1.jpg",
+					img: "../../../static/images/pic_1.jpg",
 					title: "隐秘而伟大",
 					type: "短剧",
 					price: "90.00",
 				},
 				{
 					id: 3,
-					img: "/static/images/pic_1.jpg",
+					img: "../../../static/images/pic_1.jpg",
 					title: "巨富归来",
 					type: "短剧",
 					price: "85.00",
@@ -112,7 +112,7 @@
 			this.centerList = centerList
 
 			const initBottomList = [{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "父爱如山",
 					type: "短剧",
 					price: "85.00",
@@ -120,7 +120,7 @@
 					used: 17,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "后会有期",
 					type: "短剧",
 					price: "75.00",
@@ -128,7 +128,7 @@
 					used: 16,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "西游记",
 					type: "电视剧",
 					price: "80.00",
@@ -136,7 +136,7 @@
 					used: 15,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "狂飙",
 					type: "电视剧",
 					price: "85.00",
@@ -144,7 +144,7 @@
 					used: 12,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "漫长的季节",
 					type: "电视剧",
 					price: "85.00",
@@ -152,7 +152,7 @@
 					used: 17,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "猎冰",
 					type: "电视剧",
 					price: "85.00",
@@ -160,7 +160,7 @@
 					used: 17,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "繁花",
 					type: "电视剧",
 					price: "85.00",
@@ -168,7 +168,7 @@
 					used: 17,
 				},
 				{
-					img: "/static/images/pic_2.jpg",
+					img: "../../../static/images/pic_2.jpg",
 					title: "汉武大帝",
 					type: "电视剧",
 					price: "85.00",
@@ -217,17 +217,19 @@
 
 	.swiper-item {
 		width: 100%;
-
+			height: 38vw;
+			overflow: hidden;
 		img {
 			width: 100%;
+			height: 38vw;
 			// height: 100%;
-			object-fit: contain;
+			object-fit: cover;
 		}
 	}
 
 	.center {
 		display: flex;
-		margin: 140rpx 32rpx 0;
+		margin: 88rpx 32rpx 0;
 		justify-content: space-between;
 
 		.center-box {
