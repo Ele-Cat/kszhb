@@ -143,7 +143,7 @@
         "template" : "template.h5.html",
         "router" : {
             "mode" : "history",
-            "base" : "/ks/"
+            "base" : "./ks/"
         },
         "sdkConfigs" : {
             "maps" : {
