@@ -131,6 +131,11 @@
 		font-size: 38rpx;
 		color: #808080;
 	}
+	
+	img{
+		user-select: none;
+		-webkit-user-drag: none;
+	}
 
 	/* #endif*/
 </style>

@@ -1,0 +1,1 @@
+import{s as t,p as e,x as s,o,c as a,f as r}from"./index-ecc6661e.js";import{_ as n}from"./_plugin-vue_export-helper.1b428a4d.js";const i=n({data:()=>({}),onShow(){t({title:e("title")||"圈子"}),s({title:"加载中..."})},methods:{}},[["render",function(t,e,s,n,i,p){const l=r;return o(),a(l)}]]);export{i as default};

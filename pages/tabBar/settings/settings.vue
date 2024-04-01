@@ -1,0 +1,132 @@
+<template>
+	<view>
+		<uni-nav-bar left-text="返回" title="设置" @clickLeft="back" />
+
+		<uni-card title="应用标题" extra="展示在顶部的文字">
+			<uni-easyinput type="text" v-model="title" placeholder="请输入应用标题" @input="handleTitleChange" />
+		</uni-card>
+
+		<uni-card title="首页中部卡片数据">
+			<uni-forms>
+				<uni-card v-for="(item, index) in centerList" :key="index">
+					<uni-forms-item label="标题">
+						<uni-easyinput v-model="item.title" @input="e => handleCenterChange(e, 'title', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="类型">
+						<uni-easyinput v-model="item.type" @input="e => handleCenterChange(e, 'type', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="金额">
+						<uni-easyinput v-model="item.price" @input="e => handleCenterChange(e, 'price', index)" />
+					</uni-forms-item>
+				</uni-card>
+			</uni-forms>
+		</uni-card>
+
+		<uni-card title="首页列表数据">
+			<uni-forms>
+				<view class="add" @click="handleAdd"><uni-icons type="plusempty" size="14"></uni-icons>插入一条数据</view>
+				<uni-card v-for="(item, index) in bottomList" :key="index">
+					<uni-icons type="close" class="close" size="24" color="red" @click="handleRemove(index)"></uni-icons>
+					<uni-forms-item label="标题" style="margin-top:12px;">
+						<uni-easyinput v-model="item.title" @input="e => handleBottomChange(e, 'title', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="类型">
+						<uni-easyinput v-model="item.type" @input="e => handleBottomChange(e, 'type', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="金额">
+						<uni-easyinput v-model="item.price" @input="e => handleBottomChange(e, 'price', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="剩余">
+						<uni-easyinput v-model="item.left" @input="e => handleBottomChange(e, 'left', index)" />
+					</uni-forms-item>
+					<uni-forms-item label="已赚">
+						<uni-easyinput v-model="item.used" @input="e => handleBottomChange(e, 'used', index)" />
+					</uni-forms-item>
+				</uni-card>
+			</uni-forms>
+		</uni-card>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				title: "",
+				centerList: [],
+				bottomList: [],
+			}
+		},
+		onShow() {
+			this.title = uni.getStorageSync("title")
+			document.title = this.title
+			this.centerList = uni.getStorageSync("centerList")
+			this.bottomList = uni.getStorageSync("bottomList")
+		},
+		methods: {
+			back() {
+				// uni.navigateBack()
+				uni.switchTab({
+					url: "/pages/tabBar/home/home"
+				})
+			},
+			handleTitleChange(e) {
+				document.title = e
+				uni.setStorageSync("title", e)
+			},
+			handleCenterChange(e, type, idx) {
+				this.centerList[idx][type] = e
+				uni.setStorageSync("centerList", this.centerList)
+			},
+			handleBottomChange(e, type, idx) {
+				this.bottomList[idx][type] = e
+				uni.setStorageSync("bottomList", this.bottomList)
+			},
+			handleAdd() {
+				this.bottomList.unshift({
+					title: "",
+					type: "",
+					price: "",
+					left: "",
+					used: "",
+				})
+				uni.setStorageSync("bottomList", this.bottomList)
+			},
+			handleRemove(idx) {
+				uni.showModal({
+					title: '提示',
+					content: '确认移除这条数据？',
+					success: function (res) {
+						if (res.confirm) {
+							this.bottomList.splice(idx, 1)
+							uni.setStorageSync("bottomList", this.bottomList)
+						}
+					}
+				});
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.uni-forms-item {
+		margin-bottom: 8px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	
+	.add {
+		display: inline-block;
+		border-radius: 12rpx;
+		padding: 8rpx 12rpx;
+		border: 1px solid #ccc;
+	}
+	
+	.close {
+		position: absolute;
+		right: -2px;
+		top: -2px;
+	}
+</style>
