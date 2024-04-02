@@ -1,6 +1,9 @@
 <template>
 	<view class="mine" @longpress="showPop">
-		<img src="/static/images/mine.png" alt="" />
+		<!-- <img src="/static/images/mine.png" alt="" /> -->
+		<img src="/static/images/mine_1.png" alt="" />
+		<view class="username">{{username}}</view>
+		<view class="money">{{money}}</view>
 	</view>
 	<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0">
 		<view class="title">密钥</view>
@@ -16,6 +19,8 @@
 	export default {
 		data() {
 			return {
+				username: "",
+				money: "",
 				password: "",
 			}
 		},
@@ -24,6 +29,10 @@
 			uni.setNavigationBarTitle({
 				title: uni.getStorageSync("title") || "圈子"
 			})
+			this.username = uni.getStorageSync("username") || "轩宝"
+			uni.setStorageSync("username", this.username)
+			this.money = uni.getStorageSync("money") || "3600.00"
+			uni.setStorageSync("money", this.money)
 		},
 		methods: {
 			showPop() {
@@ -51,12 +60,32 @@
 
 <style lang="scss">
 	.mine {
+		position: relative;
 		height: calc(100vh - 100rpx);
 		background-color: #fff;
 
 		img {
 			width: 100%;
 			object-fit: contain;
+		}
+		
+		.username {
+			position: absolute;
+			z-index: 99;
+			font-size: 36rpx;
+			top: 150rpx;
+			left: 150rpx;
+			font-weight: bold;
+			color: #333;
+		}
+		
+		.money {
+			position: absolute;
+			z-index: 99;
+			font-size: 28rpx;
+			top: 346rpx;
+			left: 150rpx;
+			color: #ddd;
 		}
 	}
 

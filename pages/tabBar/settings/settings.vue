@@ -5,6 +5,17 @@
 		<uni-card title="应用标题" extra="展示在顶部的文字">
 			<uni-easyinput type="text" v-model="title" placeholder="请输入应用标题" @input="handleTitleChange" />
 		</uni-card>
+		
+		<uni-card title="我的信息">
+			<uni-forms>
+				<uni-forms-item label="用户名">
+					<uni-easyinput v-model="username" @input="handleUsernameChange" />
+				</uni-forms-item>
+				<uni-forms-item label="金额">
+					<uni-easyinput v-model="money" @input="handleMoneyChange" />
+				</uni-forms-item>
+			</uni-forms>
+		</uni-card>
 
 		<uni-card title="首页中部卡片数据">
 			<uni-forms>
@@ -61,6 +72,8 @@
 		},
 		onShow() {
 			this.title = uni.getStorageSync("title")
+			this.username = uni.getStorageSync("username")
+			this.money = uni.getStorageSync("money")
 			document.title = this.title
 			this.centerList = uni.getStorageSync("centerList")
 			this.bottomList = uni.getStorageSync("bottomList")
@@ -75,6 +88,12 @@
 			handleTitleChange(e) {
 				document.title = e
 				uni.setStorageSync("title", e)
+			},
+			handleUsernameChange(e) {
+				uni.setStorageSync("username", e)
+			},
+			handleMoneyChange(e) {
+				uni.setStorageSync("money", e)
 			},
 			handleCenterChange(e, type, idx) {
 				this.centerList[idx][type] = e
