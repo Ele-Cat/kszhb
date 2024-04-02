@@ -8,7 +8,7 @@
 				<uni-icons type="scan" size="24" color="#fff"></uni-icons>
 			</view>
 			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-				<swiper class="swiper-box" :autoplay="false" @change="change">
+				<swiper class="swiper-box" :autoplay="true" @change="change">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view class="swiper-item">
 							<img :src="item.url" alt="" srcset="" />
