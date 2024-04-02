@@ -96,13 +96,17 @@
 				uni.setStorageSync("bottomList", this.bottomList)
 			},
 			handleRemove(idx) {
+				let that = this
 				uni.showModal({
 					title: '提示',
 					content: '确认移除这条数据？',
 					success: function (res) {
 						if (res.confirm) {
-							this.bottomList.splice(idx, 1)
-							uni.setStorageSync("bottomList", this.bottomList)
+							that.bottomList.splice(idx, 1)
+							uni.setStorageSync("bottomList", that.bottomList)
+							uni.showToast({
+								title: "移除成功"
+							})
 						}
 					}
 				});
