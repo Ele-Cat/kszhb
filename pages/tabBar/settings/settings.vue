@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<uni-nav-bar left-text="返回" title="设置" @clickLeft="back" />
+	<view style="padding-bottom: 36px;">
+		<uni-nav-bar :fixed="true" left-text="返回" title="设置" @clickLeft="back" />
 
 		<uni-card title="应用标题" extra="展示在顶部的文字">
 			<uni-easyinput type="text" v-model="title" placeholder="请输入应用标题" @input="handleTitleChange" />
@@ -9,6 +9,7 @@
 		<uni-card title="首页中部卡片数据">
 			<uni-forms>
 				<uni-card v-for="(item, index) in centerList" :key="index">
+					<view class="idx">{{index + 1}}</view>
 					<uni-forms-item label="标题">
 						<uni-easyinput v-model="item.title" @input="e => handleCenterChange(e, 'title', index)" />
 					</uni-forms-item>
@@ -27,6 +28,7 @@
 				<view class="add" @click="handleAdd"><uni-icons type="plusempty" size="14"></uni-icons>插入一条数据</view>
 				<uni-card v-for="(item, index) in bottomList" :key="index">
 					<uni-icons type="close" class="close" size="24" color="red" @click="handleRemove(index)"></uni-icons>
+					<view class="idx">{{index + 1}}</view>
 					<uni-forms-item label="标题" style="margin-top:12px;">
 						<uni-easyinput v-model="item.title" @input="e => handleBottomChange(e, 'title', index)" />
 					</uni-forms-item>
@@ -84,6 +86,7 @@
 			},
 			handleAdd() {
 				this.bottomList.unshift({
+					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
 					title: "",
 					type: "",
 					price: "",
@@ -128,5 +131,17 @@
 		position: absolute;
 		right: -2px;
 		top: -2px;
+	}
+	
+	.idx {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 36rpx;
+		height: 36rpx;
+		line-height: 36rpx;
+		text-align: center;
+		background-color: #ec602d;
+		color: #fff;
 	}
 </style>
