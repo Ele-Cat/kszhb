@@ -1,11 +1,11 @@
 <template>
 	<view style="padding-bottom: 36px;">
-		<uni-nav-bar :fixed="true" left-text="返回" title="设置" @clickLeft="back" />
+		<uni-nav-bar :fixed="true" left-text="返回" title="设置" right-text="重置" @clickLeft="back" @clickRight="reset" />
 
 		<uni-card title="应用标题" extra="展示在顶部的文字">
 			<uni-easyinput type="text" v-model="title" placeholder="请输入应用标题" @input="handleTitleChange" />
 		</uni-card>
-		
+
 		<uni-card title="我的信息">
 			<uni-forms>
 				<uni-forms-item label="用户名">
@@ -65,6 +65,10 @@
 </template>
 
 <script>
+	import {
+		initCenterList,
+		initBottomList
+	} from "../helper.js"
 	export default {
 		data() {
 			return {
@@ -77,10 +81,10 @@
 			}
 		},
 		onShow() {
-			this.title = uni.getStorageSync("title")
-			this.username = uni.getStorageSync("username")
-			this.money = uni.getStorageSync("money")
-			this.code = uni.getStorageSync("code")
+			this.title = uni.getStorageSync("title") || "圈子"
+			this.username = uni.getStorageSync("username") || "轩宝"
+			this.money = uni.getStorageSync("money") || "3600.00"
+			this.code = uni.getStorageSync("code") || "1264"
 			document.title = this.title
 			this.centerList = uni.getStorageSync("centerList")
 			this.bottomList = uni.getStorageSync("bottomList")
@@ -91,6 +95,30 @@
 				uni.switchTab({
 					url: "/pages/tabBar/home/home"
 				})
+			},
+			reset() {
+				let that = this
+				uni.showModal({
+					title: '提示',
+					content: '确认重置应用数据？',
+					success: function(res) {
+						if (res.confirm) {
+							uni.setStorageSync("title", "圈子")
+							that.title = uni.getStorageSync("title")
+							uni.setStorageSync("username", "轩宝")
+							that.username = uni.getStorageSync("username")
+							uni.setStorageSync("money", "3600.00")
+							that.money = uni.getStorageSync("money")
+							uni.setStorageSync("code", "1264")
+							that.code = uni.getStorageSync("code")
+							document.title = that.title
+
+							uni.setStorageSync("centerList", initCenterList)
+
+							uni.setStorageSync("bottomList", initBottomList)
+						}
+					}
+				});
 			},
 			handleTitleChange(e) {
 				document.title = e
@@ -115,6 +143,7 @@
 			},
 			handleAdd() {
 				this.bottomList.unshift({
+					id: Date.now(),
 					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
 					title: "",
 					type: "",
@@ -129,7 +158,7 @@
 				uni.showModal({
 					title: '提示',
 					content: '确认移除这条数据？',
-					success: function (res) {
+					success: function(res) {
 						if (res.confirm) {
 							that.bottomList.splice(idx, 1)
 							uni.setStorageSync("bottomList", that.bottomList)
@@ -152,20 +181,20 @@
 			margin-bottom: 0;
 		}
 	}
-	
+
 	.add {
 		display: inline-block;
 		border-radius: 12rpx;
 		padding: 8rpx 12rpx;
 		border: 1px solid #ccc;
 	}
-	
+
 	.close {
 		position: absolute;
 		right: -2px;
 		top: -2px;
 	}
-	
+
 	.idx {
 		position: absolute;
 		left: 0px;

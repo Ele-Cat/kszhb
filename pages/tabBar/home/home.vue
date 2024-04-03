@@ -8,7 +8,7 @@
 				<uni-icons type="scan" size="24" color="#fff"></uni-icons>
 			</view>
 			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
-				<swiper class="swiper-box" :autoplay="true" @change="change">
+				<swiper class="swiper-box" :interval="3500" :autoplay="true" @change="change">
 					<swiper-item v-for="(item, index) in info" :key="index">
 						<view class="swiper-item">
 							<img :src="item.url" alt="" srcset="" />
@@ -49,8 +49,8 @@
 							<text>{{item.type}}</text>
 						</view>
 						<view class="left">
-							<text>剩余{{item.left}}个</text>
-							<text>{{item.used}}人已赚</text>
+							<text>剩余 {{item.left}}/已结 {{item.used}}</text>
+							<text class="btn" @click="handleSub(item, index)">接单</text>
 						</view>
 					</view>
 				</view>
@@ -60,6 +60,10 @@
 </template>
 
 <script>
+	import {
+		initCenterList,
+		initBottomList
+	} from "../helper.js"
 	export default {
 		data() {
 			return {
@@ -86,97 +90,10 @@
 			})
 			uni.setStorageSync("title", this.title)
 
-			const initCenterList = [{
-					id: 1,
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
-					title: "去有你的地方",
-					type: "短剧",
-					price: "80.00",
-				},
-				{
-					id: 2,
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
-					title: "隐秘而伟大",
-					type: "短剧",
-					price: "90.00",
-				},
-				{
-					id: 3,
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
-					title: "巨富归来",
-					type: "短剧",
-					price: "85.00",
-				}
-			]
 			const centerList = uni.getStorageSync("centerList") || initCenterList
 			uni.setStorageSync("centerList", centerList)
 			this.centerList = centerList
 
-			const initBottomList = [{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "父爱如山",
-					type: "短剧",
-					price: "85.00",
-					left: 583,
-					used: 17,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "后会有期",
-					type: "短剧",
-					price: "75.00",
-					left: 544,
-					used: 16,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "西游记",
-					type: "电视剧",
-					price: "80.00",
-					left: 370,
-					used: 15,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "狂飙",
-					type: "电视剧",
-					price: "85.00",
-					left: 523,
-					used: 12,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "漫长的季节",
-					type: "电视剧",
-					price: "85.00",
-					left: 583,
-					used: 17,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "猎冰",
-					type: "电视剧",
-					price: "85.00",
-					left: 583,
-					used: 17,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "繁花",
-					type: "电视剧",
-					price: "85.00",
-					left: 583,
-					used: 17,
-				},
-				{
-					img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
-					title: "汉武大帝",
-					type: "电视剧",
-					price: "85.00",
-					left: 583,
-					used: 17,
-				}
-			]
 			const bottomList = uni.getStorageSync("bottomList") || initBottomList
 			uni.setStorageSync("bottomList", bottomList)
 			this.bottomList = bottomList
@@ -184,6 +101,23 @@
 		methods: {
 			change(e) {
 				this.current = e.detail.current;
+			},
+			handleSub(row, idx) {
+				let count = Number(this.bottomList[idx]["left"])
+				count -= 1
+				this.bottomList[idx]["left"] = count || 999
+				uni.setStorageSync("bottomList", this.bottomList)
+				let selectList = uni.getStorageSync("selectList") || []
+				if (selectList.find(item => item.id == row.id)) {
+					let selectIndex = selectList.findIndex(item => item.id == row.id)
+					selectList[selectIndex]["count"] += 1
+				} else {
+					selectList.push({
+						...row,
+						count: 1,
+					})
+				}
+				uni.setStorageSync("selectList", selectList)
 			}
 		}
 	}
@@ -364,9 +298,17 @@
 					.left {
 						display: flex;
 						justify-content: space-between;
+						align-items: center;
 						color: #999;
 						font-size: 28rpx;
 						margin-top: 6rpx;
+
+						.btn {
+							background-color: #ec602d;
+							color: #fff;
+							padding: 4rpx 12rpx;
+							border-radius: 8rpx;
+						}
 					}
 				}
 			}
