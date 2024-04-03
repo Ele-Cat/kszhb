@@ -3,7 +3,7 @@
 		<view class="top-title">邀请好友</view>
 		<view class="top">
 			<view>
-				我的邀请码： 1264<text>复制</text>
+				我的邀请码： {{code}}<text>复制</text>
 			</view>
 			<view class="btn">立即分享 赚钱咯</view>
 		</view>
@@ -15,7 +15,7 @@
 				<view>3.一级分佣：2%</view>
 				<view>4.二级分佣：1%</view>
 				<view>{{title}}可能会根据实际业务对活动规则进行优化调整，调整后的奖励将按照新活动规则进行奖励发放，在法律许可的合法范围内。</view>
-				<view>本活动最终解释权归影视圈所有。</view>
+				<view>本活动最终解释权归{{title}}所有。</view>
 			</view>
 		</view>
 	</view>
@@ -25,7 +25,8 @@
 	export default {
 		data() {
 			return {
-				title: ""
+				title: "",
+				code: "",
 			}
 		},
 		onShow() {
@@ -34,6 +35,9 @@
 			uni.setNavigationBarTitle({
 				title: this.title
 			})
+			
+			this.code = uni.getStorageSync("code") || "1264"
+			uni.setStorageSync("code", this.code)
 		},
 		methods: {
 

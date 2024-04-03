@@ -68,7 +68,7 @@
 				"pagePath": "pages/tabBar/recommend/recommend",
 				"iconPath": "static/recommend.png",
 				"selectedIconPath": "static/recommendHL.png",
-				"text": "推荐"
+				"text": "任务"
 			}, {
 				"pagePath": "pages/tabBar/generalize/generalize",
 				"iconPath": "static/generalize.png",

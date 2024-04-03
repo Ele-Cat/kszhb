@@ -14,6 +14,9 @@
 				<uni-forms-item label="金额">
 					<uni-easyinput v-model="money" @input="handleMoneyChange" />
 				</uni-forms-item>
+				<uni-forms-item label="邀请码">
+					<uni-easyinput v-model="code" @input="handleCodeChange" />
+				</uni-forms-item>
 			</uni-forms>
 		</uni-card>
 
@@ -66,6 +69,9 @@
 		data() {
 			return {
 				title: "",
+				username: "",
+				money: "",
+				code: "",
 				centerList: [],
 				bottomList: [],
 			}
@@ -74,6 +80,7 @@
 			this.title = uni.getStorageSync("title")
 			this.username = uni.getStorageSync("username")
 			this.money = uni.getStorageSync("money")
+			this.code = uni.getStorageSync("code")
 			document.title = this.title
 			this.centerList = uni.getStorageSync("centerList")
 			this.bottomList = uni.getStorageSync("bottomList")
@@ -94,6 +101,9 @@
 			},
 			handleMoneyChange(e) {
 				uni.setStorageSync("money", e)
+			},
+			handleCodeChange(e) {
+				uni.setStorageSync("code", e)
 			},
 			handleCenterChange(e, type, idx) {
 				this.centerList[idx][type] = e
