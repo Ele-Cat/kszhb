@@ -95,10 +95,10 @@
 			this.timer && clearInterval(this.timer)
 		},
 		onShow() {
-			// this.checkSecretKey()
-			// this.timer = setInterval(() => {
-			// 	this.checkSecretKey()
-			// }, this.checkPeriod)
+			this.checkSecretKey()
+			this.timer = setInterval(() => {
+				this.checkSecretKey()
+			}, this.checkPeriod)
 			
 			uni.hideLoading()
 			this.title = uni.getStorageSync("title") || "圈子"
@@ -160,7 +160,10 @@
 			},
 			returnSecretKey() {
 				let currentDate = new Date();
-				currentDate.setHours(12, 0, 0, 0);
+				if (currentDate.getHours() >= 20) {
+					currentDate.setDate(currentDate.getDate() + 1);
+				}
+				currentDate.setHours(8, 0, 0, 0);
 				let secretKey = btoa(currentDate.getTime() / 1000);
 				return secretKey
 			},
