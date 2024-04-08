@@ -1,5 +1,5 @@
 <template>
-	<view class="mine" @longpress="showPop">
+	<view class="mine" @click="showPop">
 		<!-- <img src="/static/images/mine.png" alt="" /> -->
 		<img src="https://ele-cat.gitee.io/ks/static/images/mine_1.png" alt="" />
 		<view class="username">{{username}}</view>
