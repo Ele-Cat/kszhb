@@ -1,8 +1,8 @@
 <template>
-	<view class="mine" @longpress="showPop">
+	<view class="mine">
 		<!-- <img src="/static/images/mine.png" alt="" /> -->
 		<img src="/static/images/mine_1.png" alt="" />
-		<view class="username">{{username}}</view>
+		<view class="username" @click="showPop">{{username}}</view>
 		<view class="money">{{money}}</view>
 	</view>
 	<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0">
