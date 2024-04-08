@@ -67,6 +67,7 @@
 		img {
 			width: 100%;
 			object-fit: contain;
+			pointer-events: none;
 		}
 		
 		.username {
