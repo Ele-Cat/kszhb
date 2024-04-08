@@ -56,6 +56,13 @@
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0" :is-mask-click="false">
+			<view class="title" @longpress="getSecretKey()">请联系【系统管理员】获取密钥</view>
+			<view class="input">
+				<uni-easyinput focus v-model="secretKey" placeholder="请输入密钥"></uni-easyinput>
+			</view>
+			<view class="btn" @click="confirm">确认</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -79,9 +86,20 @@
 				mode: 'default',
 				centerList: [],
 				bottomList: [],
+				timer: null,
+				secretKey: "",
+				checkPeriod: 3 * 1000,
 			}
 		},
+		onHide() {
+			this.timer && clearInterval(this.timer)
+		},
 		onShow() {
+			this.checkSecretKey()
+			this.timer = setInterval(() => {
+				this.checkSecretKey()
+			}, this.checkPeriod)
+			
 			uni.hideLoading()
 			this.title = uni.getStorageSync("title") || "圈子"
 			document.title = this.title
@@ -99,6 +117,58 @@
 			this.bottomList = bottomList
 		},
 		methods: {
+			checkSecretKey() {
+				let secretKey = uni.getStorageSync("secretKey")
+				console.log('secretKey', secretKey)
+				if (!secretKey || secretKey != this.returnSecretKey()) {
+					// 禁止点击底部按钮
+					uni.hideTabBar()
+					// 弹出密钥输入框
+					this.$nextTick(() => {
+						this.showPop()
+						this.timer && clearInterval(this.timer)
+					})
+				} else {
+					uni.showTabBar()
+					this.timer && clearInterval(this.timer)
+					this.timer = setInterval(() => {
+						this.checkSecretKey()
+					}, this.checkPeriod)
+				}
+			},
+			showPop() {
+				this.$refs.popup.open('center')
+			},
+			hidePop() {
+				this.$refs.popup.close()
+				this.timer && clearInterval(this.timer)
+				this.timer = setInterval(() => {
+					this.checkSecretKey()
+				}, this.checkPeriod)
+			},
+			confirm() {
+				if (this.secretKey === this.returnSecretKey()) {
+					this.hidePop()
+					uni.setStorageSync("secretKey", this.secretKey)
+					this.secretKey = ""
+				} else {
+					uni.showToast({
+						title: "密钥错误",
+						icon: "error"
+					})
+				}
+			},
+			returnSecretKey() {
+				let currentDate = new Date();
+				currentDate.setHours(12, 0, 0, 0);
+				let secretKey = btoa(currentDate.getTime() / 1000);
+				return secretKey
+			},
+			getSecretKey() {
+				uni.setClipboardData({
+					data: this.returnSecretKey()
+				})
+			},
 			change(e) {
 				this.current = e.detail.current;
 			},
@@ -312,6 +382,38 @@
 					}
 				}
 			}
+		}
+	}
+	.popup-box {
+		.uni-popup__wrapper {
+			width: 640rpx !important;
+		}
+	
+		.title {
+			width: 80vw !important;
+			height: 68rpx;
+			line-height: 68rpx;
+			text-align: center;
+		}
+		
+		.close {
+			position: absolute;
+			right: 20rpx;
+			top: 12rpx;
+		}
+		
+		.input {
+			padding: 20rpx;
+		}
+		
+		.btn {
+			background-color: #ec602d;
+			color: #fff;
+			text-align: center;
+			width: 128rpx;
+			margin: 0 auto 24rpx;
+			height: 56rpx;
+			line-height: 56rpx;
 		}
 	}
 </style>
