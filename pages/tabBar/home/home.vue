@@ -195,7 +195,7 @@
 		.top-bg {
 			position: absolute;
 			background-color: #e0c750;
-			width: 100vw;
+			width: 100%;
 			height: 320rpx;
 			z-index: 0;
 		}
@@ -346,7 +346,7 @@
 
 					.type {
 						display: flex;
-						margin-top: 8rpx;
+						margin-top: 4rpx;
 
 						text {
 							display: block;
@@ -366,7 +366,7 @@
 						align-items: center;
 						color: #999;
 						font-size: 28rpx;
-						margin-top: 6rpx;
+						margin-top: 4rpx;
 
 						.btn {
 							background-color: #ec602d;

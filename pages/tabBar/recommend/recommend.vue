@@ -1,5 +1,5 @@
 <template>
-	<view class="page" @longpress="clear">
+	<view class="page" @click="clear">
 		<view class="bottom-list" v-if="selectList.length">
 			<view class="bottom-item" v-for="(item, index) in selectList" :key="index">
 				<view class="img">
@@ -11,7 +11,6 @@
 						<text>+{{item.price}}</text>
 					</view>
 					<view class="type">
-						<text>ID:{{10320 + index}}</text>
 						<text>{{item.type}}</text>
 					</view>
 					<view class="left">
@@ -44,7 +43,6 @@
 		},
 		methods: {
 			clear() {
-				uni.setStorageSync("selectList", [])
 				let that = this
 				uni.showModal({
 					title: '提示',
@@ -117,7 +115,7 @@
 
 				.type {
 					display: flex;
-					margin-top: 8rpx;
+					margin-top: 4rpx;
 
 					text {
 						display: block;
@@ -137,7 +135,7 @@
 					align-items: center;
 					color: #999;
 					font-size: 28rpx;
-					margin-top: 6rpx;
+					margin-top: 4rpx;
 
 					.btn {
 						background-color: #ec602d;
