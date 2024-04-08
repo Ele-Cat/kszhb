@@ -1,18 +1,20 @@
 <template>
-	<view class="mine" @click="showPop">
-		<!-- <img src="/static/images/mine.png" alt="" /> -->
-		<img src="https://ele-cat.gitee.io/ks/static/images/mine_1.png" alt="" />
-		<view class="username">{{username}}</view>
-		<view class="money">{{money}}</view>
-	</view>
-	<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0">
-		<view class="title">密钥</view>
-		<uni-icons type="close" class="close" size="24" color="red" @click="hidePop"></uni-icons>
-		<view class="input">
-			<uni-easyinput focus v-model="password" type="password" placeholder="请输入密钥"></uni-easyinput>
+	<view>
+		<view class="mine" @click="showPop()">
+			<!-- <img src="/static/images/mine.png" alt="" /> -->
+			<img src="https://ele-cat.gitee.io/ks/static/images/mine_1.png" alt="" />
+			<view class="username">{{username}}</view>
+			<view class="money">{{money}}</view>
 		</view>
-		<view class="btn" @click="confirm">确认</view>
-	</uni-popup>
+		<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0">
+			<view class="title">密钥</view>
+			<uni-icons type="close" class="close" size="24" color="red" @click="hidePop"></uni-icons>
+			<view class="input">
+				<uni-easyinput focus v-model="password" type="password" placeholder="请输入密钥"></uni-easyinput>
+			</view>
+			<view class="btn" @click="confirm">确认</view>
+		</uni-popup>
+	</view>
 </template>
 
 <script>

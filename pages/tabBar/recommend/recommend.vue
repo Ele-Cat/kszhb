@@ -24,7 +24,7 @@
 
 		<view class="empty" v-if="!selectList.length">
 			<uni-icons type="folder-add" size="80" color="#999"></uni-icons>
-			<text>暂无数据</text>
+			<view>暂无数据</view>
 		</view>
 	</view>
 </template>
@@ -77,7 +77,7 @@
 		color: #999;
 		
 		.uni-icons {
-			height: 160rpx;
+			height: 120rpx;
 		}
 	}
 
