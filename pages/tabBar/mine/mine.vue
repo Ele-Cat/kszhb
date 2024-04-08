@@ -1,7 +1,7 @@
 <template>
 	<view class="mine">
 		<!-- <img src="/static/images/mine.png" alt="" /> -->
-		<img src="/static/images/mine_1.png" alt="" />
+		<img src="https://ele-cat.gitee.io/ks/static/images/mine_1.png" alt="" />
 		<view class="username" @click="showPop">{{username}}</view>
 		<view class="money">{{money}}</view>
 	</view>
