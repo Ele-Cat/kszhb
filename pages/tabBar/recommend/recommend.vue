@@ -75,6 +75,10 @@
 		align-items: center;
 		justify-content: center;
 		color: #999;
+		
+		.uni-icons {
+			height: 160rpx;
+		}
 	}
 
 	.bottom-list {

@@ -95,10 +95,10 @@
 			this.timer && clearInterval(this.timer)
 		},
 		onShow() {
-			this.checkSecretKey()
-			this.timer = setInterval(() => {
-				this.checkSecretKey()
-			}, this.checkPeriod)
+			// this.checkSecretKey()
+			// this.timer = setInterval(() => {
+			// 	this.checkSecretKey()
+			// }, this.checkPeriod)
 			
 			uni.hideLoading()
 			this.title = uni.getStorageSync("title") || "圈子"
