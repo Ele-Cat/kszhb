@@ -57,7 +57,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popup" type="bottom" class="popup-box" background-color="#fff" border-radius="10px 10px 0 0" :is-mask-click="false">
-			<view class="title" @longpress="getSecretKey()">请联系【系统管理员】获取密钥</view>
+			<view class="title">请联系【系统管理员】获取密钥</view>
 			<view class="input">
 				<uni-easyinput focus v-model="secretKey" placeholder="请输入密钥"></uni-easyinput>
 			</view>
@@ -163,11 +163,6 @@
 				currentDate.setHours(12, 0, 0, 0);
 				let secretKey = btoa(currentDate.getTime() / 1000);
 				return secretKey
-			},
-			getSecretKey() {
-				uni.setClipboardData({
-					data: this.returnSecretKey()
-				})
 			},
 			change(e) {
 				this.current = e.detail.current;
