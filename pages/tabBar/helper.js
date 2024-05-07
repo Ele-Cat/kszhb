@@ -1,20 +1,20 @@
 export const initCenterList = [{
 		id: 1,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
+		img: "/static/images/pic_1.jpg",
 		title: "去有你的地方",
 		type: "短剧",
 		price: "80.00",
 	},
 	{
 		id: 2,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
+		img: "/static/images/pic_1.jpg",
 		title: "隐秘而伟大",
 		type: "短剧",
 		price: "90.00",
 	},
 	{
 		id: 3,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_1.jpg",
+		img: "/static/images/pic_1.jpg",
 		title: "巨富归来",
 		type: "短剧",
 		price: "85.00",
@@ -23,7 +23,7 @@ export const initCenterList = [{
 
 export const initBottomList = [{
 		id: 1,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "父爱如山",
 		type: "短剧",
 		price: "85.00",
@@ -32,7 +32,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 2,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "后会有期",
 		type: "短剧",
 		price: "75.00",
@@ -41,7 +41,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 3,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "西游记",
 		type: "电视剧",
 		price: "80.00",
@@ -50,7 +50,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 4,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "狂飙",
 		type: "电视剧",
 		price: "85.00",
@@ -59,7 +59,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 5,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "漫长的季节",
 		type: "电视剧",
 		price: "85.00",
@@ -68,7 +68,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 6,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "猎冰",
 		type: "电视剧",
 		price: "85.00",
@@ -77,7 +77,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 7,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "繁花",
 		type: "电视剧",
 		price: "85.00",
@@ -86,7 +86,7 @@ export const initBottomList = [{
 	},
 	{
 		id: 8,
-		img: "https://ele-cat.gitee.io/ks/static/images/pic_2.jpg",
+		img: "/static/images/pic_2.jpg",
 		title: "汉武大帝",
 		type: "电视剧",
 		price: "85.00",
