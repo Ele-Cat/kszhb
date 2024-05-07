@@ -76,11 +76,11 @@
 			return {
 				title: "",
 				info: [{
-					url: "/static/images/swiper_1.png",
+					url: "https://ele-cat.github.io/ks/static/images/swiper_1.png",
 				}, {
-					url: "/static/images/swiper_2.png",
+					url: "https://ele-cat.github.io/ks/static/images/swiper_2.png",
 				}, {
-					url: "/static/images/swiper_3.png",
+					url: "https://ele-cat.github.io/ks/static/images/swiper_3.png",
 				}],
 				current: 0,
 				mode: 'default',

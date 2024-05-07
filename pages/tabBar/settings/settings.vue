@@ -144,7 +144,7 @@
 			handleAdd() {
 				this.bottomList.unshift({
 					id: Date.now(),
-					img: "/static/images/pic_2.jpg",
+					img: "https://ele-cat.github.io/ks/static/images/pic_2.jpg",
 					title: "",
 					type: "",
 					price: "",
