@@ -19,7 +19,7 @@
 		</view>
 		<view class="center">
 			<view class="center-box" v-for="(item, index) in centerList" :key="index">
-				<img :src="item.img" alt="" />
+				<image :src="item.img" mode="aspectFill" alt="" />
 				<view class="title">{{item.title}}</view>
 				<view class="type">{{item.type}}</view>
 				<view class="price">+{{item.price}}</view>
@@ -37,7 +37,7 @@
 			<view class="bottom-list">
 				<view class="bottom-item" v-for="(item, index) in bottomList" :key="index">
 					<view class="img">
-						<img :src="item.img" alt="">
+						<image :src="item.img" mode="aspectFill" alt="">
 					</view>
 					<view class="info">
 						<view class="title">
@@ -254,8 +254,9 @@
 			padding-bottom: 12rpx;
 			font-size: 32rpx;
 
-			img {
+			image {
 				max-width: 100%;
+				height: 130rpx;
 				border-radius: 6rpx;
 			}
 
@@ -320,21 +321,24 @@
 				border-radius: 12rpx;
 				overflow: hidden;
 				display: flex;
+				align-items: center;
 				background-color: #fff;
 				margin-bottom: 12rpx;
+				padding: 0 12rpx;
 
 				.img {
 					width: 240rpx;
 
-					img {
+					image {
 						max-width: 100%;
+						height: 160rpx;
 						object-fit: contain;
 						border-radius: 12rpx;
 					}
 				}
 
 				.info {
-					padding: 12rpx;
+					padding: 10rpx;
 					flex: 1;
 
 					.title {
@@ -369,7 +373,7 @@
 						align-items: center;
 						color: #999;
 						font-size: 28rpx;
-						margin-top: 4rpx;
+						margin-top: 2rpx;
 
 						.btn {
 							background-color: #ec602d;
