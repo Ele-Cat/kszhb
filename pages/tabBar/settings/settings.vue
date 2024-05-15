@@ -19,6 +19,25 @@
 				</uni-forms-item>
 			</uni-forms>
 		</uni-card>
+		
+		<uni-card title="首页轮播图数据">
+			<template v-slot:title>
+				<view style="padding: 16rpx 0 0;display: flex;justify-content: space-between;align-items: center;">
+					<p>首页轮播图数据</p>
+					<p @click="handleResetBanner" style="display: inline-block;line-height: 2.3;font-size: 13px;padding: 0 1.34em;color: #fff;background-color: #e64340;">重置</p>
+				</view>
+			</template>
+			<uni-forms>
+				<view class="add" @click="handleAddBanner"><uni-icons type="plusempty" size="14"></uni-icons>插入一个轮播</view>
+				<uni-card v-for="(item, index) in bannerList" :key="index">
+					<uni-icons type="close" class="close" size="24" color="red" @click="handleRemoveBanner(index)"></uni-icons>
+					<view class="idx">{{index + 1}}</view>
+					<uni-forms-item label="轮播图">
+						<img @click="handleCenterImgChange('banner', index)" :src="item.url" alt="" style="width: 240rpx;">
+					</uni-forms-item>
+				</uni-card>
+			</uni-forms>
+		</uni-card>
 
 		<uni-card title="首页中部卡片数据">
 			<template v-slot:title>
@@ -86,8 +105,9 @@
 
 <script>
 	import {
+		initBannerList,
 		initCenterList,
-		initBottomList
+		initBottomList,
 	} from "../helper.js"
 	export default {
 		data() {
@@ -96,6 +116,7 @@
 				username: "",
 				money: "",
 				code: "",
+				bannerList: [],
 				centerList: [],
 				bottomList: [],
 				imageStyles: {
@@ -115,6 +136,7 @@
 			this.money = uni.getStorageSync("money") || "3600.00"
 			this.code = uni.getStorageSync("code") || "1264"
 			document.title = this.title
+			this.bannerList = uni.getStorageSync("bannerList")
 			this.centerList = uni.getStorageSync("centerList")
 			this.bottomList = uni.getStorageSync("bottomList")
 		},
@@ -176,7 +198,9 @@
 					let reader = new FileReader();
 					reader.onload = function (event) {
 						let base64String = event.target.result;
-						if (position == 'center') {
+						if (position == 'banner') {
+							that.handleBannerChange(base64String, index)
+						} else if (position == 'center') {
 							that.handleCenterChange(base64String, 'img', index)
 						} else {
 							that.handleBottomChange(base64String, 'img', index)
@@ -185,6 +209,46 @@
 					reader.readAsDataURL(file);
 				};
 				fileInput.click();
+			},
+			handleBannerChange(e, idx) {
+				this.bannerList[idx]['url'] = e
+				uni.setStorageSync("bannerList", this.bannerList)
+			},
+			handleResetBanner() {
+				let that = this
+				uni.showModal({
+					title: '提示',
+					content: '确认重置首页轮播数据？',
+					success: function(res) {
+						if (res.confirm) {
+							uni.setStorageSync("bannerList", initBannerList)
+							that.bannerList = initBannerList
+						}
+					}
+				});
+			},
+			handleAddBanner() {
+				this.bannerList.unshift({
+					id: Date.now(),
+					url: "https://ele-cat.github.io/ks/static/images/swiper_1.png",
+				})
+				uni.setStorageSync("bannerList", this.bannerList)
+			},
+			handleRemoveBanner(idx) {
+				let that = this
+				uni.showModal({
+					title: '提示',
+					content: '确认移除这个轮播？',
+					success: function(res) {
+						if (res.confirm) {
+							that.bannerList.splice(idx, 1)
+							uni.setStorageSync("bannerList", that.bannerList)
+							uni.showToast({
+								title: "移除成功"
+							})
+						}
+					}
+				});
 			},
 			handleResetCenter() {
 				let that = this

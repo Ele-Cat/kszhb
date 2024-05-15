@@ -1,3 +1,15 @@
+export const initBannerList = [
+	{
+		url: "https://ele-cat.github.io/ks/static/images/swiper_1.png",
+	}, 
+	{
+		url: "https://ele-cat.github.io/ks/static/images/swiper_2.png",
+	}, 
+	{
+		url: "https://ele-cat.github.io/ks/static/images/swiper_3.png",
+	}
+]
+
 export const initCenterList = [{
 		id: 1,
 		img: "https://ele-cat.github.io/ks/static/images/pic_1.jpg",

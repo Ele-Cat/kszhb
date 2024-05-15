@@ -7,9 +7,9 @@
 				<uni-search-bar class="search-bar" radius="100" placeholder="输入任务编号搜索" clearButton="none" cancelButton="none" />
 				<uni-icons type="scan" size="24" color="#fff"></uni-icons>
 			</view>
-			<uni-swiper-dot :info="info" :current="current" field="content" :mode="mode">
+			<uni-swiper-dot :info="bannerList" :current="current" field="content" :mode="mode">
 				<swiper class="swiper-box" :interval="3500" :autoplay="true" @change="change">
-					<swiper-item v-for="(item, index) in info" :key="index">
+					<swiper-item v-for="(item, index) in bannerList" :key="index">
 						<view class="swiper-item">
 							<img :src="item.url" alt="" srcset="" />
 						</view>
@@ -68,20 +68,15 @@
 
 <script>
 	import {
+		initBannerList,
 		initCenterList,
-		initBottomList
+		initBottomList,
 	} from "../helper.js"
 	export default {
 		data() {
 			return {
 				title: "",
-				info: [{
-					url: "https://ele-cat.github.io/ks/static/images/swiper_1.png",
-				}, {
-					url: "https://ele-cat.github.io/ks/static/images/swiper_2.png",
-				}, {
-					url: "https://ele-cat.github.io/ks/static/images/swiper_3.png",
-				}],
+				bannerList: [],
 				current: 0,
 				mode: 'default',
 				centerList: [],
@@ -107,6 +102,10 @@
 				title: this.title
 			})
 			uni.setStorageSync("title", this.title)
+
+			const bannerList = uni.getStorageSync("bannerList") || initBannerList
+			uni.setStorageSync("bannerList", bannerList)
+			this.bannerList = bannerList
 
 			const centerList = uni.getStorageSync("centerList") || initCenterList
 			uni.setStorageSync("centerList", centerList)
