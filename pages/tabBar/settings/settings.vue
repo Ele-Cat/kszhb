@@ -230,7 +230,7 @@
 			handleAddBanner() {
 				this.bannerList.unshift({
 					id: Date.now(),
-					url: "https://ele-cat.github.io/ks/static/images/swiper_1.png",
+					url: "https://ele-cat.github.io/kszhb/static/images/swiper_1.png",
 				})
 				uni.setStorageSync("bannerList", this.bannerList)
 			},
@@ -283,7 +283,7 @@
 			handleAdd() {
 				this.bottomList.unshift({
 					id: Date.now(),
-					img: "https://ele-cat.github.io/ks/static/images/pic_2.jpg",
+					img: "https://ele-cat.github.io/kszhb/static/images/pic_2.jpg",
 					title: "",
 					type: "",
 					price: "",

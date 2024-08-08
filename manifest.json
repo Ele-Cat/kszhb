@@ -1,5 +1,5 @@
 {
-    "name" : "ks",
+    "name" : "kszhb",
     "appid" : "__UNI__5A8CA85",
     "description" : "uni-app 框架示例，一套代码，同时发行到iOS、Android、H5、小程序等多个平台，请使用手机扫码快速体验 uni-app 的强大功能",
     "versionName" : "1.0.0",
@@ -143,7 +143,7 @@
         "template" : "",
         "router" : {
             "mode" : "hash",
-            "base" : "/ks/"
+            "base" : "/kszhb/"
         },
         "sdkConfigs" : {
             "maps" : {}
